@@ -1,6 +1,5 @@
 using PropertyAPI.Enums;
 using PropertyAPI.Models;
-
 using Google.Cloud.Firestore;
 
 namespace PropertyAPI.Repositories;
@@ -13,10 +12,9 @@ public class PropertyRepository
     public PropertyRepository(Collection collection)
     {
         _collection = collection;
-        var firebaseAuthPath = "FirebaseAuth/propertyapi-db-firebase-adminsdk-smysy-9d8929db8e.json";
-        Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", firebaseAuthPath);  
-        
-        _firestoreDb = FirestoreDb.Create("propertyapi");
+        var firebaseAuthPath = "FirebaseAuth/carboncreditsfiap-firebase-adminsdk-dn8z4-162474e67b.json";
+        Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", firebaseAuthPath);          
+        _firestoreDb = FirestoreDb.Create("carboncreditsfiap");
     }
 
     public async Task<List<Property>> GetAllAsync()
