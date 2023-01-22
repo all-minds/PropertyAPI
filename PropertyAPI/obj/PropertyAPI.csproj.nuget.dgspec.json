@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/maciel/development/all-minds/PropertyAPI/src/PropertyAPI/PropertyAPI.csproj": {}
+    "/app/PropertyAPI/PropertyAPI.csproj": {}
   },
   "projects": {
-    "/home/maciel/development/all-minds/PropertyAPI/src/PropertyAPI/PropertyAPI.csproj": {
+    "/app/PropertyAPI/PropertyAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/maciel/development/all-minds/PropertyAPI/src/PropertyAPI/PropertyAPI.csproj",
+        "projectUniqueName": "/app/PropertyAPI/PropertyAPI.csproj",
         "projectName": "PropertyAPI",
-        "projectPath": "/home/maciel/development/all-minds/PropertyAPI/src/PropertyAPI/PropertyAPI.csproj",
-        "packagesPath": "/home/maciel/.nuget/packages/",
-        "outputPath": "/home/maciel/development/all-minds/PropertyAPI/src/PropertyAPI/obj/",
+        "projectPath": "/app/PropertyAPI/PropertyAPI.csproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/app/PropertyAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/maciel/.nuget/NuGet/NuGet.Config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
