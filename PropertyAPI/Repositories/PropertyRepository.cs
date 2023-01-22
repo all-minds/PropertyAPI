@@ -1,8 +1,8 @@
 using PropertyAPI.Enums;
 using PropertyAPI.Models;
 using Google.Cloud.Firestore;
-using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
+using FirebaseAdmin;
 using PropertyAPI.Services;
 
 namespace PropertyAPI.Repositories;
@@ -14,19 +14,12 @@ public class PropertyRepository
     public FirebaseApp _firebaseApp;
     public TokenService _tokenService;
 
-    public PropertyRepository(Collection collection)
+    public PropertyRepository()
     {
-        var firebaseAuthPath = "FirebaseAuth/carboncreditsfiap-firebase-adminsdk-dn8z4-162474e67b.json";
-        Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", firebaseAuthPath);          
-
-        _collection = collection;               
+        _collection = Collection.properties;               
         _firestoreDb = FirestoreDb.Create("carboncreditsfiap");
         _tokenService = new TokenService();
-
-        _firebaseApp = FirebaseApp.Create(new AppOptions()
-        {
-            Credential = GoogleCredential.GetApplicationDefault()
-        });
+        _firebaseApp = FirebaseAdmin.FirebaseApp.DefaultInstance;
     }
 
     public async Task<List<Property>> GetAllAsync(string idToken)
@@ -73,6 +66,7 @@ public class PropertyRepository
         var uid = await _tokenService.GetUid(idToken);
         var colRef = _firestoreDb.Collection(_collection.ToString());
         entity.Owner_id = uid;
+        entity.Active = true;
         var doc = await colRef.AddAsync(entity);
         entity.Id = doc.Id;
         return entity;

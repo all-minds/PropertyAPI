@@ -12,19 +12,20 @@ namespace PropertyAPI.Controllers;
 public class PropertiesController : ControllerBase
 {
     private readonly ILogger<PropertiesController> _logger;
-    private readonly PropertyRepository _propertyRepository = new (Collection.properties);
+    private readonly PropertyRepository _propertyRepository;
     public TokenService _tokenService = new TokenService();
 
-    public PropertiesController(ILogger<PropertiesController> logger)
+    public PropertiesController(ILogger<PropertiesController> logger, PropertyRepository repository)
     {
         _logger = logger;
+        _propertyRepository = repository;
     }
 
     [HttpGet]
     [Authorize]
     public async Task<ActionResult<List<Property>>> GetAllPropertiesAsync()
     {
-        var idToken = this.HttpContext.Request.Headers["Authorization"];
+        var idToken = this.HttpContext.Request.Headers["Authorization"][0].Split(' ')[1];
         return Ok(await _propertyRepository.GetAllAsync(idToken));
     }
 
@@ -73,7 +74,7 @@ public class PropertiesController : ControllerBase
     [Authorize]
     public async Task<ActionResult<Property>> AddPropertyAsync(Property property)
     {
-        var idToken = this.HttpContext.Request.Headers["Authorization"];
+        var idToken = this.HttpContext.Request.Headers["Authorization"][0].Split(' ')[1];
         return Ok(await _propertyRepository.AddAsync(property, idToken));
     }
 }

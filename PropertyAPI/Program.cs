@@ -1,5 +1,8 @@
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using PropertyAPI.Repositories;
+using Google.Apis.Auth.OAuth2;
+using FirebaseAdmin;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +23,7 @@ builder.Services
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<PropertyRepository>();
 
 var app = builder.Build();
 
@@ -34,5 +38,11 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+var firebaseAuthPath = "FirebaseAuth/carboncreditsfiap-firebase-adminsdk-dn8z4-162474e67b.json";
+Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", firebaseAuthPath);     
+FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.GetApplicationDefault()
+            });
 
 app.Run();
